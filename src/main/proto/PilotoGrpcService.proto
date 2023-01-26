@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = true;
+option java_package = "com.aizquierdo.rallyslot.core.piloto";
+
+message PilotoQuery {
+  int64 pilotoId = 1;
+}
+
+message PilotoData {
+  int64 pilotoId = 1;
+  string pilotoName = 2;
+  int64  creationDate = 3;
+  string creationUser = 4;
+  int64  modificationDate = 5;
+  string modificationUser = 6;
+  int64  deleteDate = 7;
+  string deleteUser = 8;
+
+}
+
+service PilotoGrpcService {
+  rpc getPiloto(PilotoQuery) returns (PilotoData) {};
+  rpc getPilotos(google.protobuf.Empty) returns (stream PilotoData) {};
+  rpc createPiloto(PilotoData) returns (PilotoData) {};
+  rpc updatePiloto(PilotoData) returns (PilotoData) {};
+  rpc deletePiloto(PilotoQuery) returns (google.protobuf.Empty) {};
+}
